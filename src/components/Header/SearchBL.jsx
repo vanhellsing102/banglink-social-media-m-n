@@ -1,7 +1,7 @@
 "use client";
 import { CiSearch } from "react-icons/ci";
 
-const LeftNav = () => {
+const SearchBL = () => {
     const handleSearch = (e) =>{
         e.preventDefault();
         const searchText = e.target.search.value;
@@ -19,4 +19,4 @@ const LeftNav = () => {
     );
 };
 
-export default LeftNav;
+export default SearchBL;

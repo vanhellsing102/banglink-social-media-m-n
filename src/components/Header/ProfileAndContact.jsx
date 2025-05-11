@@ -2,7 +2,7 @@ import { rightNavData } from "@/data/navData";
 import Link from "next/link";
 
 
-const RightNav = () => {
+const ProfileAndContact = () => {
     return (
         <div className='flex justify-end'>
             <ul className="flex items-center gap-3">
@@ -23,4 +23,4 @@ const RightNav = () => {
     );
 };
 
-export default RightNav;
+export default ProfileAndContact;

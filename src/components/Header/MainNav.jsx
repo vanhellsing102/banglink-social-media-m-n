@@ -3,7 +3,7 @@ import { navLinks } from '@/data/navData';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const MiddleNav = () => {
+const MainNav = () => {
     const pathName = usePathname();
     // console.log(pathName);
     return (
@@ -27,4 +27,4 @@ const MiddleNav = () => {
     );
 };
 
-export default MiddleNav;
+export default MainNav;
