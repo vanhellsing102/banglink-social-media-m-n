@@ -1,6 +1,8 @@
 "use client";
+import axios from 'axios';
 import Link from 'next/link';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { PiEye, PiEyeClosed } from "react-icons/pi";
 
 
@@ -10,7 +12,16 @@ const page = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(email, password)
+        // console.log(email, password);
+        axios.post("/api/auth/login", {email, password})
+        .then(res =>{
+            if(res.data.status){
+                console.log(res.data.user);
+                localStorage.setItem("user", JSON.stringify(res.data.user));
+                return toast.success(res.data.message);
+            }
+            toast.error(res.data.message);
+        })
     }
     return (
         <div className='flex items-center justify-center'>
@@ -18,12 +29,12 @@ const page = () => {
                 <form onSubmit={handleLogin} className='space-y-2 w-full'>
                 <div>
                     <label className='block text-sm font-semibold'>Email:</label>
-                    <input type="email" name='email' className='appearance-none w-full py-1 px-5 rounded-md outline-none border border-slate-400'/>
+                    <input type="email" name='email' required className='appearance-none w-full py-1 px-5 rounded-md outline-none border border-slate-400'/>
                 </div>
                 <div>
                     <label className='block text-sm font-semibold'>Password:</label>
                     <div className='relative'>
-                        <input type={`${showPassword ? "text" : "password"}`} name='password' className='appearance-none w-full py-1 px-5 rounded-md outline-none border border-slate-400'/>
+                        <input type={`${showPassword ? "text" : "password"}`} name='password' required className='appearance-none w-full py-1 px-5 rounded-md outline-none border border-slate-400'/>
                         <span onClick={() => setShowPassword(!showPassword)} className='absolute top-2 right-3'>
                             {
                                 showPassword ? <PiEye></PiEye> : <PiEyeClosed></PiEyeClosed>

@@ -1,11 +1,14 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { PiEye, PiEyeClosed } from "react-icons/pi";
 
 const page = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
     const handleRegister = e =>{
         e.preventDefault();
         const name = e.target.name.value;
@@ -13,6 +16,19 @@ const page = () => {
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
         console.log(name,email, password, confirmPassword);
+        if(password !== confirmPassword){
+            return toast.error("Enter same password");
+        }
+        axios.post('/api/auth/register', {
+            name, email, password
+        })
+        .then(res =>{
+            if(res.data.newUser){
+                localStorage.setItem("user", JSON.stringify(res.data.newUser))
+                return toast.success(res.data.message);
+            }
+            toast.error(res.data.message);
+        })
     }
   return (
     <div className='flex items-center justify-center'>
