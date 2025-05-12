@@ -1,6 +1,7 @@
 "use client";
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { PiEye, PiEyeClosed } from "react-icons/pi";
@@ -8,16 +9,18 @@ import { PiEye, PiEyeClosed } from "react-icons/pi";
 
 const page = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
     const handleLogin = (e) =>{
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        // console.log(email, password);
+        console.log(email, password);
         axios.post("/api/auth/login", {email, password})
         .then(res =>{
             if(res.data.status){
                 // console.log(res.data.user);
                 localStorage.setItem("user", JSON.stringify(res.data.user));
+                router.push("/");
                 return toast.success(res.data.message);
             }
             toast.error(res.data.message);

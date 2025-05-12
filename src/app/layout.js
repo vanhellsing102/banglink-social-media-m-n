@@ -27,7 +27,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-200 min-h-screen`}
       >
         <AuthContextProvider>
-          {children}
+          <Header></Header>
+          <Navbar></Navbar>
+            <div className="px-10 py-5">
+              {children}
+            </div>
           <Toaster position="top-center" reverseOrder={false}/>
         </AuthContextProvider>
       </body>

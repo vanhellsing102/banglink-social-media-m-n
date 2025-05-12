@@ -6,7 +6,7 @@ export const POST = async(request) =>{
     await connectDB();
     try {
         const {email, password} = await request.json();
-        console.log(email, password)
+        // console.log(email, password);
         const user = await User.findOne({email});
         if(!user){
             return NextResponse.json({message: "Cann't find user this email. Please provide another email"}, {status: 200});

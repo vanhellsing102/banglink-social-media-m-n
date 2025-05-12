@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { PiEye, PiEyeClosed } from "react-icons/pi";
@@ -8,6 +9,7 @@ import { PiEye, PiEyeClosed } from "react-icons/pi";
 const page = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const router = useRouter();
 
     const handleRegister = e =>{
         e.preventDefault();
@@ -24,7 +26,8 @@ const page = () => {
         })
         .then(res =>{
             if(res.data.newUser){
-                localStorage.setItem("user", JSON.stringify(res.data.newUser))
+                localStorage.setItem("user", JSON.stringify(res.data.newUser));
+                router.push("/");
                 return toast.success(res.data.message);
             }
             toast.error(res.data.message);
