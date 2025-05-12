@@ -15,7 +15,7 @@ const page = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
-        console.log(name,email, password, confirmPassword);
+        // console.log(name,email, password, confirmPassword);
         if(password !== confirmPassword){
             return toast.error("Enter same password");
         }

@@ -26,8 +26,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-200 min-h-screen`}
       >
-        {/* <Header></Header>
-        <Navbar></Navbar> */}
         <AuthContextProvider>
           {children}
           <Toaster position="top-center" reverseOrder={false}/>

@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
@@ -13,6 +13,7 @@ const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
     useEffect( () =>{
         const getCurrentUser = localStorage.getItem("user") || null;
+        JSON.parse(getCurrentUser);
         setUser(getCurrentUser);
         console.log('current user', getCurrentUser);
         if(!getCurrentUser){

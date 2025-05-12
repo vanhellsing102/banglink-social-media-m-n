@@ -16,7 +16,7 @@ const page = () => {
         axios.post("/api/auth/login", {email, password})
         .then(res =>{
             if(res.data.status){
-                console.log(res.data.user);
+                // console.log(res.data.user);
                 localStorage.setItem("user", JSON.stringify(res.data.user));
                 return toast.success(res.data.message);
             }
