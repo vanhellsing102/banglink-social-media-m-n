@@ -1,18 +1,27 @@
 "use client";
-import { createContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
 
+export const getAuthContext = () =>{
+    return useContext(AuthContext);
+}
+
 const AuthContextProvider = ({children}) => {
+    const router = useRouter();
     const [user, setUser] = useState(null);
     useEffect( () =>{
         const getCurrentUser = localStorage.getItem("user") || null;
         setUser(getCurrentUser);
+        console.log('current user', getCurrentUser);
+        if(!getCurrentUser){
+            return router.push("/login");
+        }
     }, [])
-
     const authInfo = {
         user,
-        name: "murad"
+        // name: "murad"
     }
     return (
         <AuthContext.Provider value={authInfo}>
