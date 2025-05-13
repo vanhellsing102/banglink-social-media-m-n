@@ -12,7 +12,8 @@ export const POST = async(request) =>{
         }
         const newUser = new User({name, email, password});
         await newUser.save();
-        return NextResponse.json({message: "Register successfully", newUser: newUser}, {status: 200});
+        const {password: pwd, ...safeUser} = newUser._doc;
+        return NextResponse.json({message: "Register successfully", newUser: safeUser}, {status: 200});
     } catch (error) {
         console.log(error);
         return NextResponse.json({message: "Connot get data"}, {status: 500})
