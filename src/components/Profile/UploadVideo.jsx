@@ -2,15 +2,40 @@ import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { TbSend2 } from "react-icons/tb";
 import { MdOutlineVideoLibrary } from "react-icons/md";
 import { useState } from "react";
+import { getAuthContext } from "@/context/AuthContextProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const UploadVideo = () => {
     const [selectVideo, setSelectVideo] = useState(null);
+    const {user} = getAuthContext();
+    const userId = user?._id;
+
     const handleUpLoadVidoe = (e) =>{
         e.preventDefault();
+        if(!userId) return;
+        if(!selectVideo) return;
         const description = e.target.description.value;
-        // console.log(description)
+        const reader = new FileReader();
+        reader.readAsDataURL(selectVideo);
+        reader.onloadend = () =>{
+            const video = reader.result;
+            // console.log(video);
+            const newPost = {
+                userId,
+                type: "video",
+                description,
+                video
+            }
+            axios.post("/api/upload/video", newPost)
+            .then(res =>{
+                // console.log(res.data);
+                toast.success(res.data.message);
+                e.target.reset();
+            })
+        }
     }
-    console.log(selectVideo)
+    // console.log(selectVideo);
     return (
         <div>
             <button onClick={()=>document.getElementById('my_modal_3').showModal()} className="border cursor-pointer border-blue-300 p-1 rounded-md">
@@ -28,7 +53,7 @@ const UploadVideo = () => {
                             <label className="cursor-pointer " htmlFor="video">
                                 <MdOutlineVideoLibrary className="text-[70px]"></MdOutlineVideoLibrary>
                             </label>
-                            <input onChange={(e) =>setSelectVideo(e.target.files[0])} className="hidden" type="file" name="video" id="video"/>
+                            <input onChange={(e) =>setSelectVideo(e.target.files[0])} className="hidden" type="file" name="video" id="video" accept="video/*"/>
                         </div>
                         <button className="cursor-pointer bg-slate-200 hover:bg-blue-400 transition-all duration-300 p-2 rounded-md w-full flex justify-center" type="submit">
                             <TbSend2 className="text-xl"></TbSend2>
