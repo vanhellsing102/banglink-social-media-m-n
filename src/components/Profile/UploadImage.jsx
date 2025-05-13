@@ -4,6 +4,8 @@ import { TbSend2 } from "react-icons/tb";
 import { BsImage } from "react-icons/bs";
 import { useState } from "react";
 import { getAuthContext } from "@/context/AuthContextProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const UploadImage = () => {
     const [selectImage, setSelectImage] = useState(null);
@@ -24,7 +26,14 @@ const UploadImage = () => {
                 description,
                 image,
             }
-            console.log(newPost)
+            axios.post("/api/upload/photo", newPost)
+            .then(res =>{
+                // console.log(res.data.message);
+                toast.success(res.data.message);
+                e.target.reset();
+                setSelectImage(null);
+            })
+            // console.log(newPost);
         }
     }
     // console.log(selectImage);
