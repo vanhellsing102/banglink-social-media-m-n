@@ -1,11 +1,29 @@
+import { getAuthContext } from "@/context/AuthContextProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 import { MdOutlineTextFields } from "react-icons/md";
 import { TbSend2 } from "react-icons/tb";
 
 const UploadText = () => {
+    const {user} = getAuthContext();
+    const userId = user?._id;
+    // console.log(userId);
     const handleUpLoadText = (e) =>{
         e.preventDefault();
+        if(!userId) return;
         const text = e.target.text.value;
-        console.log(text);
+        const newText = {
+            userId,
+            type: "text",
+            text
+        }
+        // console.log(newText);
+        axios.post("/api/upload/text", newText)
+        .then(res =>{
+            // console.log(res.data.message);
+            toast.success(res.data.message);
+            e.target.reset();
+        })
     }
     return (
         <div>
