@@ -12,8 +12,7 @@ const AuthContextProvider = ({children}) => {
     const router = useRouter();
     const [user, setUser] = useState(null);
     useEffect( () =>{
-        const getCurrentUser = localStorage.getItem("user") || null;
-        JSON.parse(getCurrentUser);
+        const getCurrentUser = JSON.parse(localStorage.getItem("user") || null);
         setUser(getCurrentUser);
         console.log('current user', getCurrentUser);
         if(!getCurrentUser){
