@@ -7,7 +7,7 @@ import axios from "axios";
 const useGetCurrenUserPosts = () => {
     const {user} = getAuthContext();
     const userId = user?._id;
-    const {data: currentUserPosts = []} = useQuery({
+    const {data: currentUserPosts = [], isLoading} = useQuery({
         queryKey: ['userId', userId],
         queryFn: async() =>{
             if(!userId) return;
@@ -18,7 +18,7 @@ const useGetCurrenUserPosts = () => {
         },
         enabled: !!userId
     })
-    return {currentUserPosts};
+    return {currentUserPosts, isLoading};
 };
 
 export default useGetCurrenUserPosts;
