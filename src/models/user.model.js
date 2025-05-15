@@ -17,7 +17,21 @@ const UserSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
         default: null
-    }
+    },
+    requestedUser: [
+        {
+            type: String,
+            unique: true,
+            default: null
+        }
+    ],
+    friends: [
+        {
+            type: String,
+            unique: true,
+            default: null
+        }
+    ]
 }, {timestamps: true})
 
 const User = models.User || model("User", UserSchema);

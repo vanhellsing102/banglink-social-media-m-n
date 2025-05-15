@@ -34,7 +34,7 @@ const page = () => {
         })
     }
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex items-center justify-center w-full'>
            <div className='md:w-1/2 p-5 border border-slate-500 rounded-md'>
                 <form onSubmit={handleRegister} className='space-y-2 w-full'>
                 <div>
