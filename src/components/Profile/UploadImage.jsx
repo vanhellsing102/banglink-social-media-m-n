@@ -6,9 +6,11 @@ import { useState } from "react";
 import { getAuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useGetCurrentUserPosts from "@/hooks/useGetCurrentUserPosts";
 
 const UploadImage = () => {
     const [selectImage, setSelectImage] = useState(null);
+    const {currentUserPostsRefetch} = useGetCurrentUserPosts();
     const {user} = getAuthContext();
     const userId = user?._id;
     const handleUpLoadImage = (e) =>{
@@ -31,6 +33,7 @@ const UploadImage = () => {
                 // console.log(res.data.message);
                 toast.success(res.data.message);
                 e.target.reset();
+                currentUserPostsRefetch();
                 setSelectImage(null);
             })
             // console.log(newPost);

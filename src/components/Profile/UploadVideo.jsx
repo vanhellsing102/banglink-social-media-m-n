@@ -5,9 +5,11 @@ import { useState } from "react";
 import { getAuthContext } from "@/context/AuthContextProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import useGetCurrentUserPosts from "@/hooks/useGetCurrentUserPosts";
 
 const UploadVideo = () => {
     const [selectVideo, setSelectVideo] = useState(null);
+    const {currentUserPostsRefetch} = useGetCurrentUserPosts();
     const {user} = getAuthContext();
     const userId = user?._id;
 
@@ -32,6 +34,7 @@ const UploadVideo = () => {
                 // console.log(res.data);
                 toast.success(res.data.message);
                 e.target.reset();
+                currentUserPostsRefetch();
             })
         }
     }

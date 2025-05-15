@@ -24,7 +24,30 @@ const PostSchema = new mongoose.Schema({
     video: {
         type: String,
         default: null
-    }
+    },
+    like: [
+        {
+            type: String,
+            unique: true
+        }
+    ],
+    comment: [
+        {
+            userId: {
+                type: String
+            },
+            userName: {
+                type: String
+            },
+            text: {
+                type: String
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ]
 }, {timestamps: true})
 
 const Post = models.Post || model("Post", PostSchema);

@@ -28,7 +28,7 @@ const PostCard = ({post}) => {
             </div>
             <div className="w-full min-h-[250px] flex justify-center items-center bg-blue-100">
                 {
-                    text && <p>{text}</p>
+                    text && <p className="px-2">{text}</p>
                     ||
                     image &&
                     <Image width={100} height={100} src={image} alt="conn't resolve this image"></Image>

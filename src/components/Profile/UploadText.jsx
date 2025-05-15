@@ -1,4 +1,5 @@
 import { getAuthContext } from "@/context/AuthContextProvider";
+import useGetCurrentUserPosts from "@/hooks/useGetCurrentUserPosts";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { MdOutlineTextFields } from "react-icons/md";
@@ -7,6 +8,7 @@ import { TbSend2 } from "react-icons/tb";
 const UploadText = () => {
     const {user} = getAuthContext();
     const userId = user?._id;
+    const {currentUserPostsRefetch} = useGetCurrentUserPosts();
     // console.log(userId);
     const handleUpLoadText = (e) =>{
         e.preventDefault();
@@ -23,6 +25,7 @@ const UploadText = () => {
             // console.log(res.data.message);
             toast.success(res.data.message);
             e.target.reset();
+            currentUserPostsRefetch();
         })
     }
     return (
