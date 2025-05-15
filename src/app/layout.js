@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         <AuthContextProvider>
           <Header></Header>
           <Navbar></Navbar>
-            <div className="px-10 py-5">
+            <div className="px-10 py-5 flex justify-center">
               {children}
             </div>
           <Toaster position="top-center" reverseOrder={false}/>

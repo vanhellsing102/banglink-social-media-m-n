@@ -1,8 +1,6 @@
 import { FaHome } from "react-icons/fa";
-import { FaBagShopping, FaRegCircleUser, FaUsers } from "react-icons/fa6";
+import { FaBagShopping, FaUsers } from "react-icons/fa6";
 import { MdVideoLibrary } from "react-icons/md";
-import { LuMessageCircleMore } from "react-icons/lu";
-import { IoMdNotificationsOutline } from "react-icons/io";
 
 export const navLinks = [
     {
@@ -28,20 +26,20 @@ export const navLinks = [
 ]
 
 
-export const rightNavData = [
-    {
-        id: 1,
-        icon: LuMessageCircleMore,
-        link: "/message"
-    },
-    {
-        id: 2,
-        icon: IoMdNotificationsOutline,
-        link: "/notification"
-    },
-    {
-        id: 3,
-        icon: FaRegCircleUser,
-        link: "/profile"
-    }
-]
+// export const rightNavData = [
+//     {
+//         id: 1,
+//         icon: LuMessageCircleMore,
+//         link: "/message"
+//     },
+//     {
+//         id: 2,
+//         icon: IoMdNotificationsOutline,
+//         link: "/notification"
+//     },
+//     {
+//         id: 3,
+//         icon: FaRegCircleUser,
+//         link: "/profile"
+//     }
+// ]

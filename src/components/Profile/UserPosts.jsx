@@ -7,7 +7,7 @@ const UserPosts = () => {
     const {currentUserPosts, isLoading} = useGetCurrentUserPosts();
     // console.log(currentUserPosts);
     return (
-        <div className="mt-7 md:w-[50%] w-full">
+        <div className="mt-7 w-full">
             <h1 className="text-2xl font-semibold border-b-2 border-blue-500">My Posts</h1>
             <div className="mt-5 space-y-3">
                 {
